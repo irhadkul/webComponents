@@ -13,34 +13,36 @@
             grid-template-rows: auto;
             grid-column-gap: 50px;
         }
+
+        custom-btn {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-content: center;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
     </style>
 </head>
 
 <body>
     <template id="clickedText">
         <style>
-            :host([theme="gray"]) {
+            :host([theme='gray']) {
                 background-color: gray;
             }
 
-            :host([theme="blue"]) {
+            :host([theme='blue']) {
                 background-color: blue;
             }
-            :host([theme="blue"]) p {
+
+            :host([theme='blue']) p {
                 color: white;
             }
 
-
-            :host {
-                display: flex;
-                width: 100%;
-                justify-content: center;
-                align-content: center;
-                cursor: pointer;
-                user-select: none;
-            }
-
-            :host p {
+            :host([theme='gray']) p {
                 color: gold;
             }
         </style>
@@ -60,10 +62,11 @@
     </div>
 
 
+    <script src="webcomponentsjs/webcomponents-loader.js"></script>
 
+    <script type="module" src="customButton.js"></script>
+    <script nomodule src="customButton-compiled.js"></script>
 
-
-    <script src="customButton.js"></script>
     <script>
         // Loging out template update events
         document.addEventListener("templateUpdated", function (event) {
