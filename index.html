@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web components custom elements</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .flex-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            grid-column-gap: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <template id="clickedText">
+        <style>
+            :host([theme="gray"]) {
+                background-color: gray;
+            }
+
+            :host([theme="blue"]) {
+                background-color: blue;
+            }
+            :host([theme="blue"]) p {
+                color: white;
+            }
+
+
+            :host {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                align-content: center;
+                cursor: pointer;
+                user-select: none;
+            }
+
+            :host p {
+                color: gold;
+            }
+        </style>
+        <p>You have clicked the button
+            <slot name="clickedtimes">times</slot> times</p>
+    </template>
+
+
+    <div class="flex-container">
+        <custom-btn clickedtimes="0" theme="gray">
+            <span slot="clickedtimes">0</span>
+        </custom-btn>
+
+        <custom-btn theme="blue">
+            <span slot="clickedtimes">0</span>
+        </custom-btn>
+    </div>
+
+
+
+    </custom-btn>
+
+    <script src="customButton.js"></script>
+    <script>
+        // Loging out template update events
+        document.addEventListener("templateUpdated", function (event) {
+            console.log(event);
+        })
+    </script>
+</body>
+
+</html>
