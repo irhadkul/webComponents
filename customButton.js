@@ -28,11 +28,12 @@ class CustomBtn extends HTMLElement {
   updateTemplate(attrChanged, value) {
     this.querySelectorAll(`${'[slot='+attrChanged+']'}`)[0].innerText = value;
     // Dispach the update event to the outside
-    document.dispatchEvent(new CustomEvent("templateUpdated", this));
+    this.dispatchEvent(new CustomEvent("templateUpdated", {bubbles: true, composed: true, data: this}));
   }
   connectedCallback() {
     this.onclick = (event) => {
       this._clickedtimes = parseInt(this._clickedtimes) + 1
+      this.dispatchEvent(new CustomEvent("buttonClicked", {bubbles: true, composed: true, data: this}));
     }
  
   }

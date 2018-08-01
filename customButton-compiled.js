@@ -52,7 +52,7 @@ var CustomBtn = function (_HTMLElement) {
     value: function updateTemplate(attrChanged, value) {
       this.querySelectorAll('' + ('[slot=' + attrChanged + ']'))[0].innerText = value;
       // Dispach the update event to the outside
-      document.dispatchEvent(new CustomEvent("templateUpdated", this));
+      this.dispatchEvent(new CustomEvent("templateUpdated", { bubbles: true, composed: true, data: this }));
     }
   }, {
     key: 'connectedCallback',
@@ -61,6 +61,7 @@ var CustomBtn = function (_HTMLElement) {
 
       this.onclick = function (event) {
         _this2._clickedtimes = parseInt(_this2._clickedtimes) + 1;
+        _this2.dispatchEvent(new CustomEvent("buttonClicked", { bubbles: true, composed: true, data: _this2 }));
       };
     }
   }, {
