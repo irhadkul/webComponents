@@ -17,8 +17,10 @@ class CustomBtnHolder extends HTMLElement {
         this.addEventListener("buttonClicked", function (event) {
             console.log(event);
             this.totalClickedTimes = parseInt(this.totalClickedTimes) + 1;
+            this.querySelector("[name='totalCLicked']").innerHTML =  this.totalClickedTimes; 
         });
     }
+ 
 
 }
 customElements.define('custom-btn-holder', CustomBtnHolder);

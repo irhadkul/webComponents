@@ -12,6 +12,9 @@
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto;
             grid-column-gap: 50px;
+            grid-row-gap: 50px;
+            grid-template-areas: "heading heading" "items items";
+            margin-bottom: 50px;
         }
 
         custom-btn {
@@ -24,11 +27,27 @@
             -webkit-user-select: none;
             -ms-user-select: none;
         }
+
+        .itemTwoCol {
+            grid-area: heading
+        }
+
+        load-more-btn {
+            background-color: silver;
+            display: inline-block;
+            padding: 10px;
+            width: calc(50% - 20px);
+            box-sizing: border-box;
+            float: left;
+            color: red;
+            margin: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-  
+
     <template id="clickedText">
         <style>
             :host([theme='gray']) {
@@ -47,12 +66,15 @@
                 color: gold;
             }
         </style>
-        <p>You have clicked the button<slot name="clickedtimes">times</slot> times</p>
+        <p>You have clicked the button
+            <slot name="clickedtimes">times</slot> times</p>
     </template>
 
 
-    <custom-btn-holder class="flex-container" >
-     
+    <custom-btn-holder class="flex-container">
+        <h2 class="itemTwoCol">TOTAL TIMES CLICKED:
+            <span name="totalCLicked"></span>
+        </h2>
         <custom-btn clickedtimes="0" theme="gray">
             <span slot="clickedtimes">0</span>
         </custom-btn>
@@ -60,8 +82,17 @@
         <custom-btn theme="blue">
             <span slot="clickedtimes">0</span>
         </custom-btn>
+
+
     </custom-btn-holder>
 
+
+    <load-more-btn appendinto="custom-btn-holder">
+        Append new Buttons to custom-btn-holder
+    </load-more-btn>
+    <load-more-btn appendinto="body">
+        Append new Buttons to document
+    </load-more-btn>
 
     <script src="webcomponentsjs/webcomponents-loader.js"></script>
 
@@ -71,7 +102,9 @@
     <script type="module" src="customButton.js"></script>
     <script nomodule src="customButton-compiled.js"></script>
 
-  
+    <script type="module" src="loadMoreBtn.js"></script>
+    <script nomodule src="loadMoreBtn-compiled.js"></script>
+
 </body>
 
 </html>

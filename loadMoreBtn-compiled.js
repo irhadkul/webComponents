@@ -8,43 +8,42 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CustomBtnHolder = function (_HTMLElement) {
-    _inherits(CustomBtnHolder, _HTMLElement);
+var LoadMoreBtn = function (_HTMLElement) {
+    _inherits(LoadMoreBtn, _HTMLElement);
 
-    _createClass(CustomBtnHolder, [{
-        key: 'totalClickedTimes',
-        set: function set(value) {
-            this.setAttribute('totalclickedtimes', value);
+    _createClass(LoadMoreBtn, [{
+        key: '_appendinto',
+        get: function get() {
+            return this.getAttribute('appendinto');
         },
-        get: function get() {
-            return this.getAttribute('totalclickedtimes');
-        }
-    }], [{
-        key: 'observedAttributes',
-        get: function get() {
-            return ['totalclickedtimes'];
+        set: function set(value) {
+            this.setAttribute('appendinto', value);
         }
     }]);
 
-    function CustomBtnHolder() {
-        _classCallCheck(this, CustomBtnHolder);
+    function LoadMoreBtn() {
+        _classCallCheck(this, LoadMoreBtn);
 
-        return _possibleConstructorReturn(this, (CustomBtnHolder.__proto__ || Object.getPrototypeOf(CustomBtnHolder)).call(this));
+        var _this = _possibleConstructorReturn(this, (LoadMoreBtn.__proto__ || Object.getPrototypeOf(LoadMoreBtn)).call(this));
+
+        _this._appendinto = _this._appendinto || "";
+
+        return _this;
     }
 
-    _createClass(CustomBtnHolder, [{
+    _createClass(LoadMoreBtn, [{
         key: 'connectedCallback',
         value: function connectedCallback() {
-            this.totalClickedTimes = 0;
-            this.addEventListener("buttonClicked", function (event) {
-                console.log(event);
-                this.totalClickedTimes = parseInt(this.totalClickedTimes) + 1;
-                this.querySelector("[name='totalCLicked']").innerHTML = this.totalClickedTimes;
-            });
+            var _this2 = this;
+
+            var newBtn = '<custom-btn theme=\'blue\'><span slot=\'clickedtimes\'>0</span></custom-btn>';
+            this.onclick = function (event) {
+                document.querySelector(_this2._appendinto).insertAdjacentHTML("beforeend", newBtn);
+            };
         }
     }]);
 
-    return CustomBtnHolder;
+    return LoadMoreBtn;
 }(HTMLElement);
 
-customElements.define('custom-btn-holder', CustomBtnHolder);
+customElements.define("load-more-btn", LoadMoreBtn);
