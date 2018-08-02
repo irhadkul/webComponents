@@ -14,6 +14,9 @@
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto;
             grid-column-gap: 50px;
+            grid-row-gap: 50px;
+            grid-template-areas: "heading heading" "items items";
+            margin-bottom: 50px;
         }
 
         custom-btn {
@@ -25,6 +28,22 @@
             user-select: none;
             -webkit-user-select: none;
             -ms-user-select: none;
+        }
+
+        .itemTwoCol {
+            grid-area: heading
+        }
+
+        load-more-btn {
+            background-color: silver;
+            display: inline-block;
+            padding: 10px;
+            width: calc(50% - 20px);
+            box-sizing: border-box;
+            float: left;
+            color: red;
+            margin: 10px;
+            text-align: center;
         }
     </style>
 </head>
@@ -54,7 +73,9 @@
 
 
     <custom-btn-holder class="flex-container" >
-     
+        <h2 class="itemTwoCol">TOTAL TIMES CLICKED:
+            <span name="totalCLicked"></span>
+        </h2>
         <custom-btn clickedtimes="0" theme="gray" id="toBeTested">
             <span slot="clickedtimes">0</span>
         </custom-btn>
