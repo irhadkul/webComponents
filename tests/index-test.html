@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web components custom elements</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        custom-btn-holder {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            grid-column-gap: 50px;
+        }
+
+        custom-btn {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-content: center;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+  
+    <template id="clickedText">
+        <style>
+            :host([theme='gray']) {
+                background-color: gray;
+            }
+
+            :host([theme='blue']) {
+                background-color: blue;
+            }
+
+            :host([theme='blue']) p {
+                color: white;
+            }
+
+            :host([theme='gray']) p {
+                color: gold;
+            }
+        </style>
+        <p>You have clicked the button<slot name="clickedtimes">times</slot> times</p>
+    </template>
+
+
+    <custom-btn-holder class="flex-container" >
+     
+        <custom-btn clickedtimes="0" theme="gray" id="toBeTested">
+            <span slot="clickedtimes">0</span>
+        </custom-btn>
+
+        <custom-btn theme="blue">
+            <span slot="clickedtimes">0</span>
+        </custom-btn>
+    </custom-btn-holder>
+
+    <script src="/node_modules\web-component-tester\browser.js">
+    </script>
+
+    <script src="/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module" src="/customButtonHolder.js"></script>
+    <script nomodule src="/customButtonHolder-compiled.js"></script>
+
+    <script type="module" src="/customButton.js"></script>
+    <script nomodule src="/customButton-compiled.js"></script>
+
+  <!-- // Tests -->
+ <script>
+    suite('<custom-btn>', function() {
+      test('is awesomest', function() {
+        assert.equal(document.getElementById('toBeTested').updateTemplate('clickedtimes','4'), 4);
+      });
+    });
+  </script> 
+
+</body>
+
+</html>
+
