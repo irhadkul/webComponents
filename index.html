@@ -1,49 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#fff">
     <title>Web components custom elements</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        custom-btn-holder {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto;
-            grid-column-gap: 50px;
-            grid-row-gap: 50px;
-            grid-template-areas: "heading heading" "items items";
-            margin-bottom: 50px;
-        }
-
-        custom-btn {
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            align-content: center;
-            cursor: pointer;
-            user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-        }
-
-        .itemTwoCol {
-            grid-area: heading
-        }
-
-        load-more-btn {
-            background-color: silver;
-            display: inline-block;
-            padding: 10px;
-            width: calc(50% - 20px);
-            box-sizing: border-box;
-            float: left;
-            color: red;
-            margin: 10px;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" disabled href="/main.css">
+    <link rel="manifest" href="/manifest.json">
+   
 </head>
 
 <body>
@@ -96,14 +62,26 @@
 
     <script src="webcomponentsjs/webcomponents-loader.js"></script>
 
-    <script type="module" src="customButtonHolder.js"></script>
-    <script nomodule src="customButtonHolder-compiled.js"></script>
+    <script async type="module" src="customButtonHolder.js"></script>
+    <script async nomodule src="customButtonHolder-compiled.js"></script>
 
-    <script type="module" src="customButton.js"></script>
-    <script nomodule src="customButton-compiled.js"></script>
+    <script async type="module" src="customButton.js"></script>
+    <script async nomodule src="customButton-compiled.js"></script>
 
-    <script type="module" src="loadMoreBtn.js"></script>
-    <script nomodule src="loadMoreBtn-compiled.js"></script>
+    <script async type="module" src="loadMoreBtn.js"></script>
+    <script async nomodule src="loadMoreBtn-compiled.js"></script>
+
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+            }
+        window.onload = (event)=>{
+            document.head.querySelectorAll("[rel='stylesheet']").forEach((elem,index)=>{
+                elem.removeAttribute("disabled");
+            });
+        }
+    </script>
 
 </body>
 
