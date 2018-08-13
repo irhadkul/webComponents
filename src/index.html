@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#fff">
+    <title>Web components custom elements</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" disabled href="./main.css">
+    <link rel="manifest" href="manifest.json">
+   
+</head>
+
+<body>
+
+    <template id="clickedText">
+        <style>
+            :host([theme='gray']) {
+                background-color: gray;
+            }
+
+            :host([theme='blue']) {
+                background-color: blue;
+            }
+
+            :host([theme='blue']) p {
+                color: white;
+            }
+
+            :host([theme='gray']) p {
+                color: gold;
+            }
+        </style>
+        <p>You have clicked the button
+            <slot name="clickedtimes">times</slot> times</p>
+    </template>
+
+
+    <custom-btn-holder class="flex-container">
+        <h2 class="itemTwoCol">TOTAL TIMES CLICKED:
+            <span name="totalCLicked"></span>
+        </h2>
+        <custom-btn clickedtimes="0" theme="gray">
+            <span slot="clickedtimes">0</span>
+        </custom-btn>
+
+        <custom-btn theme="blue">
+            <span slot="clickedtimes">0</span>
+        </custom-btn>
+
+
+    </custom-btn-holder>
+
+
+    <load-more-btn appendinto="custom-btn-holder">
+        Append new Buttons to custom-btn-holder
+    </load-more-btn>
+    <load-more-btn appendinto="body">
+        Append new Buttons to document
+    </load-more-btn>
+
+    <script src="libs/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script async type="module" src="js/customButtonHolder.js"></script>
+    <script async nomodule src="js/es5/customButtonHolder-compiled.js"></script>
+
+    <script async type="module" src="js/customButton.js"></script>
+    <script async nomodule src="js/es5/customButton-compiled.js"></script>
+
+    <script async type="module" src="js/loadMoreBtn.js"></script>
+    <script async nomodule src="js/es5/loadMoreBtn-compiled.js"></script>
+
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+            }
+        window.onload = (event)=>{
+            document.head.querySelectorAll("[rel='stylesheet']").forEach((elem,index)=>{
+                elem.removeAttribute("disabled");
+            });
+        }
+    </script>
+
+</body>
+
+</html>
