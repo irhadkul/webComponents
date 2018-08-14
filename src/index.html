@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#fff">
     <title>Web components custom elements</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" disabled href="./main.css">
+    <link rel="stylesheet" disabled href="main.css">
     <link rel="manifest" href="manifest.json">
    
 </head>
@@ -59,29 +59,22 @@
     <load-more-btn appendinto="body">
         Append new Buttons to document
     </load-more-btn>
+    <script type="module" src="js/main.js"></script>
+    <script nomodule src="js/es5/main.js"></script>
 
     <script src="libs/webcomponentsjs/webcomponents-loader.js"></script>
 
     <script async type="module" src="js/customButtonHolder.js"></script>
-    <script async nomodule src="js/es5/customButtonHolder-compiled.js"></script>
+    <script async nomodule src="js/es5/customButtonHolder.js"></script>
 
     <script async type="module" src="js/customButton.js"></script>
-    <script async nomodule src="js/es5/customButton-compiled.js"></script>
+    <script async nomodule src="js/es5/customButton.js"></script>
 
     <script async type="module" src="js/loadMoreBtn.js"></script>
-    <script async nomodule src="js/es5/loadMoreBtn-compiled.js"></script>
+    <script async nomodule src="js/es5/loadMoreBtn.js"></script>
 
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-            }
-        window.onload = (event)=>{
-            document.head.querySelectorAll("[rel='stylesheet']").forEach((elem,index)=>{
-                elem.removeAttribute("disabled");
-            });
-        }
-    </script>
+
 
 </body>
 
