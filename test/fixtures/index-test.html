@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#fff">
     <title>Web components custom elements</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" disabled href="/main.css">
+    <link rel="stylesheet"  href="/main.css">
     <link rel="manifest" href="/manifest.json">
    
 </head>
@@ -55,49 +55,22 @@
     </custom-btn-holder>
 
 
-    <load-more-btn appendinto="custom-btn-holder">
-        Append new Buttons to custom-btn-holder
-    </load-more-btn>
-    <load-more-btn appendinto="body">
-        Append new Buttons to document
-    </load-more-btn>
 
-    <script src="/webcomponentsjs/webcomponents-loader.js"></script>
+ 
     <script src="/node_modules/web-component-tester/browser.js"></script>
 
-    <script  type="module" src="/customButtonHolder.js"></script>
-    <script  nomodule src="/customButtonHolder-compiled.js"></script>
-
-    <script  type="module" src="/customButton.js"></script>
-    <script  nomodule src="/customButton-compiled.js"></script>
-
-    <script  type="module" src="/loadMoreBtn.js"></script>
-    <script  nomodule src="/loadMoreBtn-compiled.js"></script>
+    <script  type="module" src="../units/customButtonHolder.js"></script>
 
 
+    <script  type="module" src="../units/customButton.js"></script>
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-            }
-        window.onload = (event)=>{
-            document.head.querySelectorAll("[rel='stylesheet']").forEach((elem,index)=>{
-                elem.removeAttribute("disabled");
-            });
-        }
-    </script>
-
-<script>
     suite('<custom-btn>', function() {
-      test('is awesomest', function() {
-        assert.equal(document.getElementById('toBeTested').updateTemplate('clickedtimes','4'), 4);
-      });
+    test('is awesomest', function() {
+      console.log(this);
+      assert.equal(document.getElementById('toBeTested').updateTemplate('clickedtimes','4'), 4);
     });
-    suite('<custom-btn-holder>', function() {
-      test('is awesomest 2', function() {
-        assert.equal(document.getElementById('toBeTested').updateTemplate('clickedtimes','4'), 4);
-      });
-    });
-  </script> 
+  });
+    </script>
 
 </body>
 

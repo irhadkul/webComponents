@@ -3,7 +3,9 @@ Example of the web components technology. Includes the template, slot, shadow DO
 ### Run
 - npm install
 - npm install -g gulp
+- npm install -g web-component-tester
 - gulp
+- gulp server (Default: http://localhost:8101)
 
 
 ### Used Resources:

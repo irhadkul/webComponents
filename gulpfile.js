@@ -1,10 +1,15 @@
-var gulp = require('gulp');
+const gulp = require('gulp');
+const imagemin = require('gulp-imagemin');
+const del = require('del');
+const babel = require('gulp-babel');
+const exec = require('gulp-exec');
+const connect = require('gulp-connect');
 
-var uglify = require('gulp-uglify');
-var imagemin = require('gulp-imagemin');
-var sourcemaps = require('gulp-sourcemaps');
-var del = require('del');
-var babel = require('gulp-babel');
+const runSequence = require('run-sequence');
+ 
+
+
+
 
 var paths = {
     scripts: ['src/js/**/*.js'],
@@ -16,6 +21,14 @@ var paths = {
   };
 
 
+  gulp.task('webserver', function() {
+    connect.server({
+      name: 'Webcomponets Demo',
+      root: 'build',
+      port: 8101,
+      livereload: true
+    });
+  });
 
   gulp.task('clean', function() {
     // You can use multiple globbing patterns as you would with `gulp.src`
@@ -50,7 +63,8 @@ var paths = {
 
   gulp.task('css', function() {
     return gulp.src(paths.css)
-      .pipe(gulp.dest('build'));
+      .pipe(gulp.dest('build'))
+      .pipe(connect.reload());
   });
 
   gulp.task('images', ['clean'], function() {
@@ -67,10 +81,32 @@ var paths = {
   });
 
 
+  gulp.task('test', function() {
+    runSequence('test:unit');
+  });
+
+  gulp.task('test:unit', function () {
+    var options = {
+      continueOnError: false, // default = false, true means don't emit error event
+      pipeStdout: false, // default = false, true means stdout is written to file.contents
+      customTemplatingThing: "test" // content passed to lodash.template()
+    };
+    var reportOptions = {
+      err: true, // default = true, false means don't write err
+      stderr: true, // default = true, false means don't write stderr
+      stdout: true // default = true, false means don't write stdout
+    };
+
+    return gulp.src('./**/**')
+    .pipe(exec('wct', options))
+    .pipe(exec.reporter(reportOptions));
+
+  });
+
   gulp.task('watch', function() {
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(paths.images, ['images']);
   });
 
-
+  gulp.task('server', ['webserver']);
   gulp.task('default', ['html', 'scripts', 'sw', 'libs' , 'images','css']);

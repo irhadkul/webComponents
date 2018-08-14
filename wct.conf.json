@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "suites": ["test/fixtures/index-test.html"],
+    "plugins": {
+      "local": {
+        "browsers": ["chrome"]
+      }
+    }
+  }
