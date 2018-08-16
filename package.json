@@ -4,6 +4,8 @@
   "description": "Web components demo",
   "main": "customButton.js",
   "scripts": {
+    "build": "gulp",
+    "server": "gulp server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
