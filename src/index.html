@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" disabled href="main.css">
     <link rel="manifest" href="manifest.json">
-   
+
 </head>
 
 <body>
@@ -36,11 +36,13 @@
             <slot name="clickedtimes">times</slot> times</p>
     </template>
 
+    <h2>Custom Web components
 
-    <custom-btn-holder class="flex-container">
-        <h2 class="itemTwoCol">TOTAL TIMES CLICKED:
-            <span name="totalCLicked"></span>
         </h2>
+    <custom-btn-holder class="flex-container">
+        <h3 class="itemTwoCol">TOTAL TIMES CLICKED:
+            <span name="totalCLicked"></span>
+        </h3>
         <custom-btn clickedtimes="0" theme="gray">
             <span slot="clickedtimes">0</span>
         </custom-btn>
@@ -59,10 +61,16 @@
     <load-more-btn appendinto="body">
         Append new Buttons to document
     </load-more-btn>
+
+
+
+    <hr>
+    <h2> Built in web components</h2>
 <select is="extended-dropdown">
     <option value="1"> First</option>
     <option value="2"> Second</option>
 </select>
+
 
     <script type="module" src="js/main.js"></script>
     <script nomodule src="js/es5/main.js"></script>
