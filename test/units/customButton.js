@@ -32,13 +32,13 @@ class CustomBtn extends HTMLElement {
   
     // Dispach the update event to the outside
     this.dispatchEvent(new CustomEvent("templateUpdated", {bubbles: true, composed: true, data: this}));
-    return value
+    return value;
   }
   connectedCallback() {
     this.onclick = (event) => {
-      this._clickedtimes = parseInt(this._clickedtimes) + 1
+      this._clickedtimes = parseInt(this._clickedtimes) + 1;
       this.dispatchEvent(new CustomEvent("buttonClicked", {bubbles: true, composed: true, data: this}));
-    }
+    };
  
   }
 
