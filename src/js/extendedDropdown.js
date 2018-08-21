@@ -1,6 +1,7 @@
 class ExtendedDropdown extends HTMLSelectElement {
-    constructor() {
-        super();
+    constructor(...args) {
+        const self = super(...args);
+        return self;
     }
     connectedCallback(){
         console.log("Extended dropdown is connected");
@@ -10,6 +11,7 @@ class ExtendedDropdown extends HTMLSelectElement {
     bindEventListeners(){
         this.addEventListener("change", ( event) => {
             console.log('Change happened with the event:', event);
+            console.log(`Selected index is now at: ${this.selectedIndex}`);
         });
     }
 }
