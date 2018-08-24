@@ -13,6 +13,13 @@ class ExtendedDropdown extends HTMLSelectElement {
             console.log('Change happened with the event:', event);
             console.log(`Selected index is now at: ${this.selectedIndex}`);
         });
+        this.addEventListener("focusin", (event)=>{
+            console.log("Focus in:", event);
+        });
+        
+        this.addEventListener("blur", (event)=>{
+            console.log("Blur:", event);
+        });
     }
 }
 customElements.define("extended-dropdown", ExtendedDropdown, {extends: "select"});
