@@ -14,6 +14,7 @@ custom-btn-holder {
 custom-btn {
     display: flex;
     width: 100%;
+    margin-top: 5px;
     justify-content: center;
     align-content: center;
     cursor: pointer;

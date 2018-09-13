@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
-const del = require('del');
+const rimraf = require('rimraf');
 const babel = require('gulp-babel');
 const exec = require('gulp-exec');
 const connect = require('gulp-connect');
@@ -30,9 +30,9 @@ var paths = {
     });
   });
 
-  gulp.task('clean', function() {
+  gulp.task('clean', function(cb) {
     // You can use multiple globbing patterns as you would with `gulp.src`
-    return del(['build/js/**/*','build/images/**/*','build/*.html']);
+    rimraf('./folder', cb);
   });
 
   gulp.task('buildES5', function() {
@@ -59,7 +59,7 @@ var paths = {
       .pipe(gulp.dest('build'));
   });
 
-  gulp.task('scripts', ['clean','buildES5','copyES6']);
+  gulp.task('scripts', ['buildES5','copyES6']);
 
   gulp.task('css', function() {
     return gulp.src(paths.css)
@@ -67,7 +67,7 @@ var paths = {
       .pipe(connect.reload());
   });
 
-  gulp.task('images', ['clean'], function() {
+  gulp.task('images',  function() {
     return gulp.src(paths.images)
       // Pass in options to the task
       .pipe(imagemin({optimizationLevel: 5}))
@@ -75,7 +75,7 @@ var paths = {
   });
 
   
-  gulp.task('html', ['clean'], function() {
+  gulp.task('html',  function() {
     return gulp.src(paths.html)
       .pipe(gulp.dest('build'));
   });
@@ -109,4 +109,4 @@ var paths = {
   });
 
   gulp.task('server', ['webserver']);
-  gulp.task('default', ['html', 'scripts', 'sw', 'libs' , 'images','css']);
+  gulp.task('default', ['clean','html', 'scripts', 'sw', 'libs' , 'images','css']);
